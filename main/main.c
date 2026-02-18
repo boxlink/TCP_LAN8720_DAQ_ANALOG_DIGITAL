@@ -128,7 +128,8 @@ static void IRAM_ATTR isr_gpio(void *arg)
     BaseType_t higher_prio_woken = pdFALSE;
 
     /* arg contiene el número de GPIO configurado en isr_handler_add */
-    pulse_event_t evt = { .pin = (uint8_t)(uint32_t)arg };
+    pulse_event_t evt = { 
+        .pin = (uint8_t)(uint32_t)arg };
 
     /* Si la queue está llena el pulso se descarta (no bloquea en ISR) */
     xQueueSendFromISR(g_pulse_queue, &evt, &higher_prio_woken);
